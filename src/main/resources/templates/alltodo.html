@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Todo List</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container-fluid text-center">
+  <div><h2>My ToDo List</h2></div>
+  <div class="m-3">
+    <a class="h4" th:href="@{/todo/new}">Add new Todo</a>
+  </div>
+  <div th:if="${message}" class="alert alert-success text-center">
+    [[${message}]]
+  </div>
+  <div>
+   <table class="table table-bordered">
+     <thead class="table-light">
+     <tr>
+       <th>ID</th>
+       <th>Description</th>
+       <th>Due Date</th>
+       <th>Priority</th>
+       <th>Status</th>
+       <th></th>
+     </tr>
+     </thead>
+     <tbody>
+     <th:block th:each="todo : ${listTodo}">
+       <tr>
+         <td>[[${todo.id}]]</td>
+         <td>[[${todo.description}]]</td>
+         <td>[[${todo.dueDate}]]</td>
+         <td>[[${todo.priority}]]</td>
+         <td>[[${todo.status}]]</td>
+         <td>
+           <a class="h5 me-5" th:href="@{'/todo/update/' + ${todo.id}}">Update</a>
+           <a class="h5" th:href="@{'/todo/delete/' + ${todo.id}}">Delete</a>
+         </td>
+       </tr>
+     </th:block>
+     </tbody>
+   </table>
+  </div>
+</div>
+</body>
+</html>
